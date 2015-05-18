@@ -350,7 +350,7 @@ public class TestGUIrestaurante extends JFrame {
 						rest.getLPlatos().put(cod, pl);
 						JOptionPane.showMessageDialog(null, "El plato ha sido agregado\n\n Utilice el boton \"Cargar Ingredientes\" para recargar la tabla","Guardado", JOptionPane.PLAIN_MESSAGE);
 						//TODO ver como cargar ingredientes
-						scrollPane.setViewportView(getDatosPlatos((false)));
+						scrollPane.setViewportView(getDatosPlatos((true)));
 						System.out.println(pl);
 					}
 				}
