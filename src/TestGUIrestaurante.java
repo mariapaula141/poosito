@@ -29,6 +29,7 @@ import co.edu.javeriana.restaurante.negocio.Ingrediente;
 import co.edu.javeriana.restaurante.negocio.IngredientePlato;
 import co.edu.javeriana.restaurante.negocio.Plato;
 import co.edu.javeriana.restaurante.negocio.PlatoCarta;
+import co.edu.javeriana.restaurante.negocio.PlatoDiario;
 import co.edu.javeriana.restaurante.negocio.Restaurante;
 import co.edu.javeriana.restaurante.persistencia.ManejadorArchivos;
 
@@ -312,6 +313,47 @@ public class TestGUIrestaurante extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				scrollPane_1.setViewportView(getDatosPlatos(true));
 				btnAlmacenarPlato.setEnabled(true);
+				int selectedRowIndex = tablaPlatos.getSelectedRow();
+				int selectedColumnIndex = tablaPlatos.getSelectedColumn();
+				if(selectedColumnIndex==-1 || selectedRowIndex==-1){
+					JOptionPane.showMessageDialog(null, "Por favor seleccione la nueva fila","Advertencia", JOptionPane.WARNING_MESSAGE);
+
+				}else{
+					boolean pasa=true;
+					Plato pl;
+					System.out.println(selectedRowIndex);
+					int cod = (int) tablaIngredientes.getModel().getValueAt(selectedRowIndex, 0);
+					
+						//String selectedObject = (String) tablaPlatos.getModel().getValueAt(selectedRowIndex, i);
+					for(int i=1;i<6;i++){
+						String selectedObject = (String) tablaPlatos.getModel().getValueAt(selectedRowIndex, i);
+						if(selectedObject.equals("")){
+							JOptionPane.showMessageDialog(null, "Recuerde llenar todos los campos y dar enter", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							pasa=false;
+							break;
+						}
+					}
+					String tipo ="";
+					tipo= (String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 2);
+					if(tipo.equalsIgnoreCase("diario")){
+						pl = new PlatoDiario();
+						pl.setNombre((String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 1));
+						pl.setCodigo(cod);
+					}else{
+						pl = new PlatoCarta();
+						pl.setNombre((String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 1));
+						pl.setCodigo(cod);
+
+					}
+					if(pasa){
+					
+						rest.getLPlatos().put(cod, pl);
+						JOptionPane.showMessageDialog(null, "El plato ha sido agregado\n\n Utilice el boton \"Cargar Ingredientes\" para recargar la tabla","Guardado", JOptionPane.PLAIN_MESSAGE);
+						//TODO ver como cargar ingredientes
+						scrollPane.setViewportView(getDatosPlatos((false)));
+						System.out.println(pl);
+					}
+				}
 			}
 		});
 		panel_4.add(btnNuevoPlato);
