@@ -404,6 +404,9 @@ public class TestGUIrestaurante extends JFrame {
 
 		JLabel lblIngredientes_1 = new JLabel("Ingredientes");
 		panel_5.add(lblIngredientes_1, BorderLayout.NORTH);
+		
+		JPanel panel_6 = new JPanel();
+		tabbedPane.addTab("Menu", null, panel_6, null);
 
 
 
