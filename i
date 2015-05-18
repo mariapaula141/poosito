@@ -1,0 +1,46 @@
+#codigo------------nombre-----------precioUnitario---descripcionUnidad---inventario---minimo
+1		*Frijoles Rojos		*2000		*Porcion 200 gr		*50	*10
+2		*Arroz Blanco		*1000		*Libra			*40	*10
+3		*Harina Fina		*200		*Libra			*8	*3
+4		*Chicharron Seco	*1500		*Porcion 100 gr		*70	*15
+5		*Timate Maduro		*800		*Libra			*20	*5
+6		*Carne Molida		*1000		*Porcion 300 gr		*40	*10
+7		*Zapallo Amarillo	*3544		*500 gr			*14	*5
+8		*Carne de Vaca		*4697		*Libra			*17	*7
+9		*Espinacas		*2046		*300 gr			*13	*8
+10		*Diente de león		*3946		*Libra			*14	*8
+11		*Puerco			*3105		*401 gr			*14	*8
+12		*Pimienta		*3460		*317 gr			*15	*9
+13		*Tomillo		*3907		*148 gr			*18	*5
+14		*Mejorana		*2883		*456 gr			*14	*8
+15		*Ajo			*4529		*337 gr			*19	*9
+16		*Clavo			*4905		*433 gr			*13	*9
+17		*Chile ancho		*2315		*340 gr			*19	*5
+18		*Chile pasilla		*4576		*214 gr			*13	*7
+19		*Chile jalapeño		*2014		*215 gr			*12	*8
+20		*Tomates		*4075		*252 gr			*14	*7
+21		*Betacaroteno		*2418		*167 gr			*12	*8
+22		*Pepino			*3338		*500 gr			*17	*7
+23		*Apio			*4430		*271 gr			*18	*6
+24		*Acelgas		*2293		*430 gr			*20	*8
+25		*Pimientos		*3265		*335 gr			*13	*5
+26		*Aguacate		*4173		*345 gr			*13	*5
+27		*Chile ancho		*2419		*429 gr			*12	*9
+28		*Pápalo			*4951		*382 gr			*13	*7
+29		*Chile guajillo		*2221		*414 gr			*17	*9
+30		*Verdolaga		*3362		*254 gr			*15	*5
+31		*Epazote		*4719		*472 gr			*12	*8
+32		*Zanahoria		*2300		*295 gr			*18	*7
+33		*Cilantro o culantro	*3706		*274 gr			*14	*9
+34		*Coriandro		*2643		*203 gr			*17	*5
+35		*Calabaza		*4250		*392 gr			*20	*8
+36		*Calabacin		*3469		*253 gr			*14	*6
+37		*Habichuelas		*3837		*491 gr			*18	*6
+38		*Ejotes			*3326		*259 gr			*16	*9
+39		*Chícharos		*4447		*276 gr			*14	*9
+40		*Guisantes		*3927		*357 gr			*13	*7
+41		*Tomate o jitomate	*3516		*407 gr			*14	*7
+42		*Chile			*2641		*310 gr			*12	*7
+43		*Pimiento		*2978		*337 gr			*14	*9
+44		*Ajies			*4336		*362 gr			*18	*7
+0
