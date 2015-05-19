@@ -3,6 +3,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -313,6 +314,14 @@ public class TestGUIrestaurante extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				scrollPane_1.setViewportView(getDatosPlatos(true));
 				btnAlmacenarPlato.setEnabled(true);
+
+			}
+		});
+		panel_4.add(btnNuevoPlato);
+		btnAlmacenarPlato.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				int selectedRowIndex = tablaPlatos.getSelectedRow();
 				int selectedColumnIndex = tablaPlatos.getSelectedColumn();
 				if(selectedColumnIndex==-1 || selectedRowIndex==-1){
@@ -321,43 +330,63 @@ public class TestGUIrestaurante extends JFrame {
 				}else{
 					boolean pasa=true;
 					Plato pl;
-					System.out.println(selectedRowIndex);
+					selectedRowIndex = tablaPlatos.getSelectedRow();
+					System.out.println("Estamos en la linea: "+selectedRowIndex);
 					int cod = (int) tablaIngredientes.getModel().getValueAt(selectedRowIndex, 0);
-					
-						//String selectedObject = (String) tablaPlatos.getModel().getValueAt(selectedRowIndex, i);
-					for(int i=1;i<6;i++){
+
+					//String selectedObject = (String) tablaPlatos.getModel().getValueAt(selectedRowIndex, i);
+					//mejorar esta condicion
+					for(int i=1;i<4;i++){
 						String selectedObject = (String) tablaPlatos.getModel().getValueAt(selectedRowIndex, i);
 						if(selectedObject.equals("")){
 							JOptionPane.showMessageDialog(null, "Recuerde llenar todos los campos y dar enter", "Advertencia", JOptionPane.WARNING_MESSAGE);
-							pasa=false;
+							//pasa=false;
 							break;
 						}
 					}
 					String tipo ="";
 					tipo= (String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 2);
-					if(tipo.equalsIgnoreCase("diario")){
-						pl = new PlatoDiario();
-						pl.setNombre((String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 1));
-						pl.setCodigo(cod);
-					}else{
-						pl = new PlatoCarta();
-						pl.setNombre((String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 1));
-						pl.setCodigo(cod);
+					List Linp = new ArrayList<IngredientePlato>();
+					for(int i=0;i<tablaIngredientesPlatos.getRowCount();i++){
+						String a= (String) tablaIngredientesPlatos.getValueAt(i, 1).toString();
+						String b= (String) tablaIngredientesPlatos.getValueAt(i, 0).toString();
+						if((boolean)tablaIngredientesPlatos.getValueAt(i, 4) == true){
+							System.out.println("Codigo: "+b+"  Nombre del ingre: "+a);
+							String cantidad = (String)tablaIngredientesPlatos.getValueAt(i, 3);
+							if(cantidad.equals("")){
+								JOptionPane.showMessageDialog(null, "Recuerde llenar la cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
+								cantidad = (String)tablaIngredientesPlatos.getModel().getValueAt(selectedRowIndex, 3);
+							}
+							int numCan = Integer.parseInt(cantidad);
+							int codi = (int)tablaIngredientesPlatos.getValueAt(i, 0);
+							IngredientePlato inp= new IngredientePlato(numCan, codi, rest.buscarIngrediente(codi));
+							Linp.add(inp);
+
+						}
 
 					}
-					if(pasa){
-					
-						rest.getLPlatos().put(cod, pl);
-						JOptionPane.showMessageDialog(null, "El plato ha sido agregado\n\n Utilice el boton \"Cargar Ingredientes\" para recargar la tabla","Guardado", JOptionPane.PLAIN_MESSAGE);
-						//TODO ver como cargar ingredientes
-						scrollPane.setViewportView(getDatosPlatos((true)));
-						System.out.println(pl);
+
+					if(tipo.equalsIgnoreCase("diario")){
+						pl = new PlatoDiario(cod, (String)tablaPlatos.getValueAt(selectedRowIndex, 1), 0,Linp);
+						System.out.println("Eligio plato diario ");
+
+					}else{
+						System.out.println("Eligio plato carta");
+						String day = (String) tablaPlatos.getValueAt(selectedRowIndex, 3);
+						pl= new PlatoCarta(cod, (String)tablaPlatos.getValueAt(selectedRowIndex, 1), 0, Linp, day);
+
 					}
+					;
+					rest.getLPlatos().put(cod, pl);
+					JOptionPane.showMessageDialog(null, "El plato ha sido agregado\n\n Utilice el boton \"Cargar Ingredientes\" para recargar la tabla","Guardado", JOptionPane.PLAIN_MESSAGE);
+					//TODO ver como cargar ingredientes
+					scrollPane.setViewportView(getDatosPlatos((false)));
+					System.out.println(pl);
+
 				}
+
 			}
 		});
-		panel_4.add(btnNuevoPlato);
-
 		btnAlmacenarPlato.setEnabled(false);
 		panel_4.add(btnAlmacenarPlato);
 
@@ -404,7 +433,7 @@ public class TestGUIrestaurante extends JFrame {
 
 		JLabel lblIngredientes_1 = new JLabel("Ingredientes");
 		panel_5.add(lblIngredientes_1, BorderLayout.NORTH);
-		
+
 		JPanel panel_6 = new JPanel();
 		tabbedPane.addTab("Menu", null, panel_6, null);
 
@@ -416,9 +445,10 @@ public class TestGUIrestaurante extends JFrame {
 		Vector rowData2 = new Vector();
 		int cod=0;
 		//System.out.println("Buscando Codigo: "+codigo);
-		for(Plato item:rest.getLPlatos().values()){
-			//System.out.println(item);
-			if(!agregar){
+		if(!agregar){
+			for(Plato item:rest.getLPlatos().values()){
+				//System.out.println(item);
+
 				if(item.getCodigo()==codigo){
 					for(IngredientePlato ip :item.getLIngredientePlato()){
 						//System.out.println(ip.getIngrediente());
@@ -434,20 +464,21 @@ public class TestGUIrestaurante extends JFrame {
 					}
 				}
 			}
-			else{
-				for(IngredientePlato ip :item.getLIngredientePlato()){
-					//System.out.println(ip.getIngrediente());
-					Object[] fila = new Object[5];
-					//System.out.println("a");
-					fila[0] = ip.getIngrediente().getCodigo();
-					//System.out.println("b");
-					fila[1] = ip.getIngrediente().getNombre();
-					fila[2] = ip.getIngrediente().getPrecioUnitario();
-					fila[3] = ip.getCantidad();
-					fila[4] = false;
-					Vector filaItem = new Vector (Arrays.asList(fila));
-					rowData2.add(filaItem);
-				}
+
+		}
+		else{
+			for(Ingrediente ip :rest.getLIngredientes()){
+				//System.out.println(ip.getIngrediente());
+				Object[] fila = new Object[5];
+				//System.out.println("a");
+				fila[0] = ip.getCodigo();
+				//System.out.println("b");
+				fila[1] = ip.getNombre();
+				fila[2] = ip.getPrecioUnitario();
+				fila[3] = "";
+				fila[4] = false;
+				Vector filaItem = new Vector (Arrays.asList(fila));
+				rowData2.add(filaItem);
 			}
 		}
 		Vector columnNamesV2 = new Vector();

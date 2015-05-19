@@ -10,11 +10,11 @@ public abstract class Plato  implements Serializable{
 	private enumEstado estado;
 	private int precio;
 	private List<IngredientePlato> LIngredientePlato;
-	
+
 	public enum enumEstado{
 		ACTIVO, DESCONTINUADO	
 	}
-	
+
 	/**
 	 * Constructor por defecto
 	 */
@@ -26,19 +26,19 @@ public abstract class Plato  implements Serializable{
 
 	public String getEstado() {
 		if(this.estado==enumEstado.ACTIVO){
-		return "ACTIVO";	
+			return "ACTIVO";	
 		}else{
-		return "DESCONTINUADO";
+			return "DESCONTINUADO";
 		}
 	}
 
 	public void setEstado(String estadoNuevo) {
 		if(estadoNuevo.equalsIgnoreCase("ACTIVO")){
 			this.estado = enumEstado.ACTIVO;	
-			}else{
-				this.estado = enumEstado.DESCONTINUADO;
-			}
-		
+		}else{
+			this.estado = enumEstado.DESCONTINUADO;
+		}
+
 	}
 
 	/**
@@ -55,12 +55,12 @@ public abstract class Plato  implements Serializable{
 		this.precio = precio;
 		LIngredientePlato = lIngredientePlato;
 	}
-	
+
 	/**
 	 * Metodo a heredad que se utiliza para calcular el precio de un plato
 	 */
 	public abstract void calcularPrecio();
-	
+
 	/**
 	 * Este metodo permite crear un IngredientePlato
 	 * @param cant cantidad solicitada
@@ -72,7 +72,7 @@ public abstract class Plato  implements Serializable{
 		IngredientePlato inp= new IngredientePlato(cant, cod, ing);
 		return inp;
 	}
-	
+
 	/**
 	 * @return the codigo
 	 */
@@ -181,7 +181,7 @@ public abstract class Plato  implements Serializable{
 				diaimp="Dia No Disponible";
 				break;
 			}
-			retorno = String.format("%-10s %-30s %-20s %-20s $%-20s\n",codigo,nombre,"Carta",diaimp,precio);
+			retorno = String.format("%-10s %-30s %-20s %-20s $%-20s\n",codigo,nombre,"Carta",this.getEstado(),precio);
 		}
 		else{
 			retorno = String.format("%-10s %-30s %-20s %-20s $%-20s\n",codigo,nombre,"Diario","",precio);
@@ -190,5 +190,5 @@ public abstract class Plato  implements Serializable{
 		return retorno;
 
 	}
-	
+
 }

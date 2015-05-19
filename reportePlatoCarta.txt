@@ -1,4 +1,40 @@
---Reporte PlatoCarta
-Ingrediente: Verdolaga
-Dia: ju
-No hay coincidencia para los datos
+Codigo: 27  Nombre del ingre: Chile ancho
+Codigo: 30  Nombre del ingre: Verdolaga
+Codigo: 6  Nombre del ingre: Carne Molida
+Codigo: 33  Nombre del ingre: Cilantro o culantro
+Codigo: 19  Nombre del ingre: Chile jalape�o
+Codigo: 39  Nombre del ingre: Ch�charos
+Codigo: 20  Nombre del ingre: Tomates
+Codigo: 44  Nombre del ingre: Ajies
+Codigo: 30  Nombre del ingre: Verdolaga
+Codigo: 41  Nombre del ingre: Tomate o jitomate
+Codigo: 6  Nombre del ingre: Carne Molida
+Codigo: 27  Nombre del ingre: Chile ancho
+Codigo: 40  Nombre del ingre: Guisantes
+Codigo: 16  Nombre del ingre: Clavo
+Codigo: 18  Nombre del ingre: Chile pasilla
+Codigo: 30  Nombre del ingre: Verdolaga
+Codigo: 39  Nombre del ingre: Ch�charos
+Codigo: 28  Nombre del ingre: P�palo
+Codigo: 32  Nombre del ingre: Zanahoria
+Codigo: 15  Nombre del ingre: Ajo
+Codigo: 32  Nombre del ingre: Zanahoria
+Codigo: 1  Nombre del ingre: Frijoles Rojos
+Codigo: 37  Nombre del ingre: Habichuelas
+Codigo: 2  Nombre del ingre: Arroz Blanco
+Codigo: 21  Nombre del ingre: Betacaroteno
+Codigo: 7  Nombre del ingre: Zapallo Amarillo
+Codigo: 15  Nombre del ingre: Ajo
+Codigo: 13  Nombre del ingre: Tomillo
+Codigo: 28  Nombre del ingre: P�palo
+Codigo: 8  Nombre del ingre: Carne de Vaca
+Codigo: 41  Nombre del ingre: Tomate o jitomate
+Codigo: 24  Nombre del ingre: Acelgas
+Codigo: 41  Nombre del ingre: Tomate o jitomate
+Codigo: 7  Nombre del ingre: Zapallo Amarillo
+Codigo: 27  Nombre del ingre: Chile ancho
+Codigo: 16  Nombre del ingre: Clavo
+Codigo: 32  Nombre del ingre: Zanahoria
+Codigo: 31  Nombre del ingre: Epazote
+Codigo: 26  Nombre del ingre: Aguacate
+Codigo: 36  Nombre del ingre: Calabacin
