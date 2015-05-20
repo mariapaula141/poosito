@@ -58,7 +58,7 @@ public class TestGUIrestaurante extends JFrame {
 	private String[] columnasMenu = {"Codigo","Nombre","Precio","Tipo","Dia"};
 	private JTable tablaIngredientesPlatos;
 	private JTable tablaMenu;
-	private final JScrollPane scrollPane_2;
+	private final JScrollPane scrollIngrePlatos;
 	/**
 	 * Launch the application.
 	 */
@@ -185,13 +185,13 @@ public class TestGUIrestaurante extends JFrame {
 		tabbedPane.addTab("Ingredientes", null, ingredientes, null);
 		ingredientes.setLayout(new BorderLayout(0, 0));
 
-		final JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(getDatosIngredientes(false));
-		scrollPane.setSize(100,200);
-		scrollPane.setPreferredSize(new Dimension(500,200));
-		scrollPane.setMaximumSize(new Dimension(100, 200));
+		final JScrollPane scrollIngredientes = new JScrollPane();
+		scrollIngredientes.setViewportView(getDatosIngredientes(false));
+		scrollIngredientes.setSize(100,200);
+		scrollIngredientes.setPreferredSize(new Dimension(500,200));
+		scrollIngredientes.setMaximumSize(new Dimension(100, 200));
 
-		ingredientes.add(scrollPane);
+		ingredientes.add(scrollIngredientes);
 		JPanel panel_3 = new JPanel();
 		ingredientes.add(panel_3, BorderLayout.SOUTH);
 		panel_3.setLayout(new GridLayout(2, 3, 0, 0));
@@ -206,7 +206,7 @@ public class TestGUIrestaurante extends JFrame {
 				int returnVal = chooser.showOpenDialog(getParent());
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 					rest.setLIngredientes(ManejadorArchivos.LeerIngredientes(chooser.getSelectedFile().getAbsolutePath()));
-					scrollPane.setViewportView(getDatosIngredientes(false));
+					scrollIngredientes.setViewportView(getDatosIngredientes(false));
 				}
 				else{
 				}
@@ -257,7 +257,7 @@ public class TestGUIrestaurante extends JFrame {
 						rest.getLIngredientes().add(ing);
 						JOptionPane.showMessageDialog(null, "El Ingrediente ha sido agregado\n\n Utilice el boton \"Cargar Ingredientes\" para recargar la tabla","Guardado", JOptionPane.PLAIN_MESSAGE);
 						//TODO ver como cargar ingredientes
-						scrollPane.setViewportView(getDatosIngredientes(false));
+						scrollIngredientes.setViewportView(getDatosIngredientes(false));
 						System.out.println(ing);
 					}
 				}
@@ -268,7 +268,7 @@ public class TestGUIrestaurante extends JFrame {
 		JButton btnNewButton = new JButton("Nuevo Ingrediente");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				scrollPane.setViewportView(getDatosIngredientes(true));
+				scrollIngredientes.setViewportView(getDatosIngredientes(true));
 				btnNewButton_2.setEnabled(true);
 			}
 		});
@@ -303,7 +303,7 @@ public class TestGUIrestaurante extends JFrame {
 		panel_4.setBorder(new EmptyBorder(0, 20, 20, 20));
 		platos.add(panel_4, BorderLayout.SOUTH);
 		panel_4.setLayout(new GridLayout(2, 3, 0, 0));
-		final JScrollPane scrollPane_1 = new JScrollPane();
+		final JScrollPane scrollPlatos = new JScrollPane();
 		JButton btnCargarPlatos = new JButton("Cargar Platos");
 		btnCargarPlatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -314,9 +314,9 @@ public class TestGUIrestaurante extends JFrame {
 				int returnVal = chooser.showOpenDialog(getParent());
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 					rest.setLPlatos((HashMap<Integer, Plato>) ManejadorArchivos.LeerPlatos(chooser.getSelectedFile().getAbsolutePath()));
-					scrollPane_1.setViewportView(getDatosPlatos(false));
+					scrollPlatos.setViewportView(getDatosPlatos(false));
 					Dimension d = tablaPlatos.getPreferredSize();
-					scrollPane_1.setPreferredSize(new Dimension(d.width,tablaPlatos.getRowHeight()*tablaPlatos.getRowCount()+1));
+					scrollPlatos.setPreferredSize(new Dimension(d.width,tablaPlatos.getRowHeight()*tablaPlatos.getRowCount()+1));
 				}
 				else{
 				}
@@ -328,7 +328,7 @@ public class TestGUIrestaurante extends JFrame {
 		JButton btnNuevoPlato = new JButton("Nuevo Plato");
 		btnNuevoPlato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				scrollPane_1.setViewportView(getDatosPlatos(true));
+				scrollPlatos.setViewportView(getDatosPlatos(true));
 				btnAlmacenarPlato.setEnabled(true);
 
 			}
@@ -401,7 +401,7 @@ public class TestGUIrestaurante extends JFrame {
 					rest.getLPlatos().put(cod, pl);
 					JOptionPane.showMessageDialog(null, "El plato ha sido agregado\n\n Utilice el boton \"Cargar Ingredientes\" para recargar la tabla","Guardado", JOptionPane.PLAIN_MESSAGE);
 					//TODO ver como cargar ingredientes
-					scrollPane.setViewportView(getDatosPlatos((false)));
+					scrollIngredientes.setViewportView(getDatosPlatos((false)));
 					System.out.println(pl);
 
 				}
@@ -429,28 +429,28 @@ public class TestGUIrestaurante extends JFrame {
 		panel_2.add(lblNewLabel_4, BorderLayout.NORTH);
 
 
-		panel_2.add(scrollPane_1, BorderLayout.SOUTH);
+		panel_2.add(scrollPlatos, BorderLayout.SOUTH);
 
-		scrollPane_1.setViewportView(getDatosPlatos(false));
-		scrollPane_1.setPreferredSize(new Dimension(500,200));
+		scrollPlatos.setViewportView(getDatosPlatos(false));
+		scrollPlatos.setPreferredSize(new Dimension(500,200));
 		//scrollPane_1.setPreferredSize(new Dimension(d.width,tablaPlatos.getRowHeight()*tablaPlatos.getRowCount()+1));
-		scrollPane_1.setMaximumSize(new Dimension(100, 100));
+		scrollPlatos.setMaximumSize(new Dimension(100, 100));
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new EmptyBorder(0, 20, 20, 20));
 		platos.add(panel_5, BorderLayout.CENTER);
 		panel_5.setLayout(new BorderLayout(0, 0));
 
-		scrollPane_2 = new JScrollPane();
-		panel_5.add(scrollPane_2);
+		scrollIngrePlatos = new JScrollPane();
+		panel_5.add(scrollIngrePlatos);
 
 		//final JScrollPane scrollPane_1 = new JScrollPane();
 		//scrollPane_2.setViewportView(getDatosIngredientePlato(false));
 
-		scrollPane_2.setPreferredSize(new Dimension(500,200));
+		scrollIngrePlatos.setPreferredSize(new Dimension(500,200));
 		//scrollPane_2.setPreferredSize(new Dimension(d1.width,tablaIngredientesPlatos.getRowHeight()*tablaIngredientesPlatos.getRowCount()+1));
 
-		scrollPane_2.setMaximumSize(new Dimension(100, 100));
+		scrollIngrePlatos.setMaximumSize(new Dimension(100, 100));
 
 		JLabel lblIngredientes_1 = new JLabel("Ingredientes");
 		panel_5.add(lblIngredientes_1, BorderLayout.NORTH);
@@ -477,9 +477,9 @@ public class TestGUIrestaurante extends JFrame {
 		JButton btnNewButton_4 = new JButton("Regresar");
 		panel_7.add(btnNewButton_4);
 		
-		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setViewportView(getMenu());
-		menu.add(scrollPane_3, BorderLayout.CENTER);
+		JScrollPane scrollMenu = new JScrollPane();
+		scrollMenu.setViewportView(getMenu());
+		menu.add(scrollMenu, BorderLayout.CENTER);
 
 
 	}
@@ -629,9 +629,9 @@ public class TestGUIrestaurante extends JFrame {
 					// print first column value from selected row
 					//System.out.println(tablaPlatos.getValueAt(tablaPlatos.getSelectedRow(), 0).toString());
 					if(agregar){
-						scrollPane_2.setViewportView(getDatosIngredientePlato(true,-1));
+						scrollIngrePlatos.setViewportView(getDatosIngredientePlato(true,-1));
 					}else{
-						scrollPane_2.setViewportView(getDatosIngredientePlato(false,Integer.parseInt(tablaPlatos.getValueAt(tablaPlatos.getSelectedRow(), 0).toString())));
+						scrollIngrePlatos.setViewportView(getDatosIngredientePlato(false,Integer.parseInt(tablaPlatos.getValueAt(tablaPlatos.getSelectedRow(), 0).toString())));
 					}
 				}
 			}
