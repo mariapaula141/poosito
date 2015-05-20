@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -53,7 +55,9 @@ public class TestGUIrestaurante extends JFrame {
 	private String[] columnasPlatos = {"Codigo","Nombre","Tipo","Dia"};
 	private String[] columnasIngredientesPlatos = {"Codigo","Nombre","Precio Unitario","Cantidad"};
 	private String[] columnasIngredientesPlatos2 = {"Codigo","Nombre","Precio Unitario","Cantidad","Selección"};
+	private String[] columnasMenu = {"Codigo","Nombre","Precio","Tipo","Dia"};
 	private JTable tablaIngredientesPlatos;
+	private JTable tablaMenu;
 	private final JScrollPane scrollPane_2;
 	/**
 	 * Launch the application.
@@ -84,6 +88,18 @@ public class TestGUIrestaurante extends JFrame {
 		rest = new Restaurante();
 
 		final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Tab: " + tabbedPane.getSelectedIndex());
+				switch(tabbedPane.getSelectedIndex()){
+					
+				}
+			}
+		});
+		
 		getContentPane().add(tabbedPane, BorderLayout.NORTH);
 
 		JPanel servicios = new JPanel();
@@ -375,6 +391,11 @@ public class TestGUIrestaurante extends JFrame {
 						String day = (String) tablaPlatos.getValueAt(selectedRowIndex, 3);
 						pl= new PlatoCarta(cod, (String)tablaPlatos.getValueAt(selectedRowIndex, 1), 0, Linp, day);
 
+
+						pl = new PlatoCarta();
+						pl.setNombre((String)tablaPlatos.getModel().getValueAt(selectedRowIndex, 1));
+						pl.setCodigo(cod);
+
 					}
 					;
 					rest.getLPlatos().put(cod, pl);
@@ -433,14 +454,65 @@ public class TestGUIrestaurante extends JFrame {
 
 		JLabel lblIngredientes_1 = new JLabel("Ingredientes");
 		panel_5.add(lblIngredientes_1, BorderLayout.NORTH);
-
-		JPanel panel_6 = new JPanel();
-		tabbedPane.addTab("Menu", null, panel_6, null);
-
+		
+		JPanel menu = new JPanel();
+		menu.setBorder(new EmptyBorder(20, 20, 20, 20));
+		tabbedPane.addTab("Menu", null, menu, null);
+		menu.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_5 = new JLabel("Menu");
+		menu.add(lblNewLabel_5, BorderLayout.NORTH);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new EmptyBorder(10, 0, 0, 0));
+		menu.add(panel_7, BorderLayout.SOUTH);
+		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		panel_7.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		panel_7.add(lblNewLabel_7);
+		
+		JButton btnNewButton_4 = new JButton("Regresar");
+		panel_7.add(btnNewButton_4);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setViewportView(getMenu());
+		menu.add(scrollPane_3, BorderLayout.CENTER);
 
 
 	}
+	private JTable getMenu(){
+		Vector rowData2 = new Vector();
+		int cod=0;
+		for(Plato item:rest.getLPlatos().values()){
 
+			Object[] fila = new Object[5];
+			fila[0] = item.getCodigo();
+			cod = item.getCodigo();
+			fila[1] = item.getNombre();
+			fila[2] = item.getPrecio();
+			if(item instanceof PlatoCarta){
+				String diaimp;
+				fila[3]="Carta";
+				fila[4]=((PlatoCarta) item).getDia();
+			}
+			else{
+				fila[3]="Diario";
+				fila[4]="No Aplica";
+			}
+			Vector filaItem = new Vector (Arrays.asList(fila));
+			rowData2.add(filaItem);
+		}
+		
+
+		Vector columnNamesV2 = new Vector(Arrays.asList(this.columnasMenu));
+
+		tablaMenu = new JTable(rowData2,columnNamesV2);
+
+		return tablaMenu;
+	}
 	private JTable getDatosIngredientePlato(boolean agregar,int codigo) {
 		Vector rowData2 = new Vector();
 		int cod=0;
